@@ -5,6 +5,7 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import Icon from 'react-native-vector-icons/Ionicons';
 
 import {GlobalStyles} from './constants/styles.js';
+import IconButton from './components/ui/IconButton';
 import AllExpenses from './screens/components/AllExpenses';
 import ManageExpense from './screens/components/ManageExpense';
 import RecentExpenses from './screens/components/RecentExpenses';
@@ -20,6 +21,14 @@ const ExpensesOverview = () => {
         headerTintColor: 'white',
         tabBarStyle: {backgroundColor: GlobalStyles.colors.primary500},
         tabBarActiveBackgroundColor: GlobalStyles.colors.accent500,
+        headerRight: ({tintColor}) => (
+          <IconButton
+            icon="add"
+            size={24}
+            color={tintColor}
+            onPress={() => {}}
+          />
+        ),
       }}>
       <BottomTabs.Screen
         name="RecentExpenses"
