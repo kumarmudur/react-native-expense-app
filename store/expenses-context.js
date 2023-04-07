@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useReducer} from 'react';
 import {createContext} from 'react';
 
 export const ExpensesContext = createContext({
@@ -8,7 +8,31 @@ export const ExpensesContext = createContext({
   updateExpense: (id, {description, amount, date}) => {},
 });
 
+const expensesReducer = (state, action) => {
+  switch (action.type) {
+    case 'ADD':
+    case 'DELETE':
+    case 'UPDATE':
+    default:
+      return state;
+  }
+};
+
 const ExpensesContextProvider = ({children}) => {
+  const [expensesState, dispatch] = useReducer(expensesReducer);
+
+  const addExpense = expenseData => {
+    dispatch({type: 'ADD', payload: expenseData});
+  };
+
+  const deleteExpense = id => {
+    dispatch({type: 'DELETE', payload: id});
+  };
+
+  const updateExpense = (id, expenseData) => {
+    dispatch({type: 'UPDATE', payload: {id: id, data: expenseData}});
+  };
+
   return <ExpensesContext.Provider>{children}</ExpensesContext.Provider>;
 };
 
