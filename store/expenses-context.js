@@ -1,3 +1,4 @@
+import React from 'react';
 import {createContext} from 'react';
 
 export const ExpensesContext = createContext({
@@ -6,3 +7,9 @@ export const ExpensesContext = createContext({
   deleteExpense: id => {},
   updateExpense: (id, {description, amount, date}) => {},
 });
+
+const ExpensesContextProvider = ({children}) => {
+  return <ExpensesContext.Provider>{children}</ExpensesContext.Provider>;
+};
+
+export default ExpensesContextProvider;
