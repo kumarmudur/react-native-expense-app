@@ -86,6 +86,7 @@ const expensesReducer = (state, action) => {
       updatableExpense[updatableExpenseIndex] = updatedItem;
       return updatedExpenses;
     case 'DELETE':
+      return state.filter(expense => expense.id !== action.payload);
     default:
       return state;
   }
