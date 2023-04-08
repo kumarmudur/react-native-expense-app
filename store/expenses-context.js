@@ -107,7 +107,18 @@ const ExpensesContextProvider = ({children}) => {
     dispatch({type: 'UPDATE', payload: {id, data: expenseData}});
   };
 
-  return <ExpensesContext.Provider>{children}</ExpensesContext.Provider>;
+  const value = {
+    expenses: expensesState,
+    addExpense,
+    deleteExpense,
+    updateExpense,
+  };
+
+  return (
+    <ExpensesContext.Provider value={value}>
+      {children}
+    </ExpensesContext.Provider>
+  );
 };
 
 export default ExpensesContextProvider;
