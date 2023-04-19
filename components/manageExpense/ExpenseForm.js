@@ -1,30 +1,48 @@
-import React from 'react';
-import {View} from 'react-native';
+import React, {useState} from 'react';
+import {StyleSheet, Text, View} from 'react-native';
 
 import Input from './Input';
 
 const ExpenseForm = () => {
-  console.log('Expense Form');
+  const [inputValues, setInputValues] = useState({
+    amount: '',
+    date: '',
+    description: '',
+  });
 
-  const amountChangeHandler = () => {};
+  const inputChangeHandler = (inputIdentifier, enteredText) => {
+    setInputValues(currentInputValues => {
+      return {
+        ...currentInputValues,
+        [inputIdentifier]: enteredText,
+      };
+    });
+  };
 
   return (
-    <View>
-      <Input
-        label="amount"
-        textInputConfig={{
-          keyboardType: 'decimal-pad',
-          onChangeText: amountChangeHandler,
-        }}
-      />
-      <Input
-        label="Date"
-        textInputConfig={{
-          placeholder: 'YYYY-MM-DD',
-          maxLength: 10,
-          onChangeText: () => {},
-        }}
-      />
+    <View style={styles.form}>
+      <Text style={styles.title}>Your Expense</Text>
+      <View style={styles.inputsRow}>
+        <Input
+          label="amount"
+          style={styles.rowInput}
+          textInputConfig={{
+            keyboardType: 'decimal-pad',
+            onChangeText: inputChangeHandler.bind(this, 'amount'),
+            value: inputValues.amount,
+          }}
+        />
+        <Input
+          label="Date"
+          style={styles.rowInput}
+          textInputConfig={{
+            placeholder: 'YYYY-MM-DD',
+            maxLength: 10,
+            onChangeText: () => {},
+          }}
+        />
+      </View>
+
       <Input
         label="Description"
         textInputConfig={{
@@ -36,3 +54,22 @@ const ExpenseForm = () => {
 };
 
 export default ExpenseForm;
+
+const styles = StyleSheet.create({
+  form: {
+    marginTop: 80,
+  },
+  title: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    color: 'white',
+    textAlign: 'center',
+  },
+  inputsRow: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
+  rowInput: {
+    flex: 1,
+  },
+});
