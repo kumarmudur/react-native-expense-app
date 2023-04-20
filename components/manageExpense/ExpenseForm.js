@@ -42,7 +42,6 @@ const ExpenseForm = () => {
           }}
         />
       </View>
-
       <Input
         label="Description"
         textInputConfig={{
